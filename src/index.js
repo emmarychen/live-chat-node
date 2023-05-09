@@ -13,6 +13,9 @@ app.use(cors(corsOptions));
 app.get('/', (req, res) => {
   res.send('hello world');
 });
+app.get('/test', (req, res) => {
+  res.send('hello test');
+});
 
 app.use('/api/login', require(__dirname + '/routes/login'));
 
