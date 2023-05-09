@@ -3,10 +3,9 @@ const bluebird = require('bluebird');
 
 const db = mysql.createConnection({
   host: 'us-cdbr-east-06.cleardb.net',
-  user: 'test',
+  user: 'bbf6fd3aa26a15',
   password: 'caa679b6',
   database: 'heroku_4d85e7e8281f7b8',
-  port: 3306
 });
 
 db.on('error', ex => {
