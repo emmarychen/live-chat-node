@@ -1,7 +1,15 @@
 const express = require("express");
-const cors = require('cors');
+// const cors = require('cors');
 
 const app = express();
+
+const mysql = require('mysql');
+const connection = mysql.createConnection({
+  host: 'us-cdbr-east-06.cleardb.net',
+  user: 'bbf6fd3aa26a15',
+  password: 'caa679b6',
+  database: 'heroku_4d85e7e8281f7b8',
+});
 
 // const corsOptions ={
 //   origin:'http://localhost:8080',
@@ -9,16 +17,17 @@ const app = express();
 //   optionSuccessStatus:200
 // }
 // app.use(cors(corsOptions));
-app.use(cors());
+// app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send('hello world');
-});
-app.get('/test', (req, res) => {
-  res.send('hello test');
+  connection.query('SELECT * FROM member', (err, rows) => {
+
+      res.json(rows);
+    
+  });
 });
 
-app.use('/api/login', require(__dirname + '/routes/login'));
+// app.use('/api/login', require(__dirname + '/routes/login'));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
