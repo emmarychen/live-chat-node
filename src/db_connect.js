@@ -7,6 +7,7 @@ const db = mysql.createConnection({
   user: 'bbf6fd3aa26a15',
   password: 'caa679b6',
   database: 'heroku_4d85e7e8281f7b8',
+  useConnectionPooling: true
 });
 
 // local
@@ -25,5 +26,11 @@ db.on('error', ex => {
 db.connect();
 
 bluebird.promisifyAll(db);
+
+process.on('uncaughtException',function(err){
+    if(err.code == "PROTOCOL_CONNECTION_LOST"){ 
+        mysql.restart();
+    }
+});
 
 module.exports = db;
