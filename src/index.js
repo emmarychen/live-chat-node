@@ -5,19 +5,24 @@ const path = require('path');
 
 const app = express();
 
-const corsOptions ={
-  origin:'https://live-chat-node.herokuapp.com',
-  credentials:true, //access-control-allow-credentials:true
-  optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+// const corsOptions ={
+//   // origin:'https://live-chat-node.herokuapp.com',
+//   origin:'http://localhost:8080',
+//   credentials:true,
+//   optionSuccessStatus:200
+// }
+// app.use(cors(corsOptions));
 // app.use(cors());
 
-// app.get('/', (req, res) => {
-//   res.send('hi')
-// });
+app.all("*", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Request-Method", "PUT,POST,GET,DELETE,OPTIONS");
+  next();
+});
 
 app.use('/api/login', require(__dirname + '/routes/login'));
+
 app.use(express.static(path.resolve(__dirname, './dist')));
 
 app.get('*', function(req, res) {
