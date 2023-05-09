@@ -1,8 +1,6 @@
 const express = require("express");
 const cors = require('cors');
 
-const db = require(__dirname + '/db_connect');
-
 const app = express();
 
 const corsOptions ={
@@ -18,4 +16,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/login', require(__dirname + '/routes/login'));
 
-app.listen(3000, () => { console.log('啟動server'); });
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server is listening on ${port}`);
+});
