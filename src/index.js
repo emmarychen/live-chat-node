@@ -1,6 +1,5 @@
 const express = require("express");
-const cors = require('cors');
-const fs = require('fs');
+// const cors = require('cors');
 const path = require('path');
 
 const app = express();
@@ -12,12 +11,11 @@ const app = express();
 //   optionSuccessStatus:200
 // }
 // app.use(cors(corsOptions));
-// app.use(cors());
 
 app.all("*", (req, res, next) => {
   res.header("Access-Control-Allow-Origin", req.headers.origin);
   res.header("Access-Control-Allow-Credentials", true);
-  res.header("Access-Control-Request-Method", "PUT,POST,GET,DELETE,OPTIONS");
+  res.header("Access-Control-Request-Method", "PUT,POST,GET,DELETE,OPTIONS");
   next();
 });
 
