@@ -1,23 +1,27 @@
 const express = require("express");
-// const cors = require('cors');
+const cors = require('cors');
 const path = require('path');
 
 const app = express();
 
-// const corsOptions ={
-//   // origin:'https://live-chat-node.herokuapp.com',
-//   origin:'http://localhost:8080',
-//   credentials:true,
-//   optionSuccessStatus:200
-// }
-// app.use(cors(corsOptions));
+const corsOptions = {
+  origin: [
+    'https://live-chat-node.herokuapp.com',
+    'http://localhost:8080',
+  ],
+  credentials: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
 
-app.all("*", (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header("Access-Control-Request-Method", "PUT,POST,GET,DELETE,OPTIONS");
-  next();
-});
+app.use(cors(corsOptions));
+
+// ub方案
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", req.headers.host);
+//   res.header("Access-Control-Allow-Credentials", true);
+//   next();
+// }); 
 
 app.use('/api/login', require(__dirname + '/routes/login'));
 
