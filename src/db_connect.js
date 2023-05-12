@@ -34,4 +34,12 @@ const pool  = mysql.createPool({
 
 // bluebird.promisifyAll(db);
 
-module.exports = pool;
+function getConnection({okCallBack}) {
+  pool.getConnection((err, connection) => {
+    okCallBack(err, connection);
+  });
+};
+
+module.exports = {
+  getConnection
+}

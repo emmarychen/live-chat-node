@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
@@ -13,8 +14,10 @@ const corsOptions = {
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
-
 app.use(cors(corsOptions));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // ub方案
 // app.use((req, res, next) => {
