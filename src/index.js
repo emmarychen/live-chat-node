@@ -29,7 +29,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/login', require(__dirname + '/routes/login'));
 
 app.use(express.static(path.resolve(__dirname, './dist')));
-
 app.get('*', function(req, res) {
   res.sendFile(path.resolve(__dirname, './dist/index.html'));
 });

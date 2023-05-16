@@ -1,5 +1,4 @@
 const mysql = require('mysql');
-const bluebird = require('bluebird');
 
 // heroku
 const pool  = mysql.createPool({
@@ -17,22 +16,6 @@ const pool  = mysql.createPool({
 //   database: 'live_chat',
 //   port: 8889
 // });
-
-// const db = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'test',
-//   password: 'test',
-//   database: 'live_chat',
-//   port: 8889
-// });
-
-// db.on('error', ex => {
-//   console.log(ex);
-// });
-
-// db.connect();
-
-// bluebird.promisifyAll(db);
 
 function getConnection({okCallBack}) {
   pool.getConnection((err, connection) => {
