@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
     okCallBack(err, conn) {
       conn.query(sql, [account, password], (err, data) => {
         if(err) {
-          res.status(500).send("伺服器錯誤");
+          res.status(500).send('伺服器錯誤');
         }
         if(data.length > 0) {
           const id    = data[0].userId;
@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
           return res.json(output);
         }
         else {
-          return res.status(400).send("帳號或密碼錯誤");
+          return res.status(400).send('帳號或密碼錯誤');
         }
       });
       conn.release();

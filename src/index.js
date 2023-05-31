@@ -1,7 +1,10 @@
 const express = require("express");
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
 const path = require('path');
+
+dotenv.config();
 
 const app = express();
 
@@ -26,7 +29,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //   next();
 // }); 
 
+app.use('/api/register', require(__dirname + '/routes/register'));
 app.use('/api/login', require(__dirname + '/routes/login'));
+app.use('/api/google', require(__dirname + '/routes/google'));
 
 app.use(express.static(path.resolve(__dirname, './dist')));
 app.get('*', function(req, res) {
