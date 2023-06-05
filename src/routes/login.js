@@ -1,7 +1,7 @@
 const express = require('express');
-const pool    = require(__dirname + '/../db_connect');
-const jwt     = require(__dirname + '/../jwt.js');
-const router  = express.Router();
+const pool = require(__dirname + '/../db_connect');
+const jwt = require(__dirname + '/../jwt.js');
+const router = express.Router();
 
 router.post('/', (req, res) => {
   const { account, password } = req.body;
@@ -11,27 +11,23 @@ router.post('/', (req, res) => {
     token  : ''
   };
   const sql = "SELECT * FROM member WHERE userId = ? AND pwd = PASSWORD(?)";
+  pool.connect(sql, [account, password], {
+    okCallBack(err, data) {
+      if(err) {
+        res.status(500).send('伺服器錯誤');
+      }
+      if(data.length > 0) {
+        const id    = data[0].userId;
+        const token = jwt.generateToken(id);
 
-  pool.getConnection({
-    okCallBack(err, conn) {
-      conn.query(sql, [account, password], (err, data) => {
-        if(err) {
-          res.status(500).send('伺服器錯誤');
-        }
-        if(data.length > 0) {
-          const id    = data[0].userId;
-          const token = jwt.generateToken(id);
-
-          output.success = true;
-          output.message = '成功登入'
-          output.token   = token;
-          return res.json(output);
-        }
-        else {
-          return res.status(400).send('帳號或密碼錯誤');
-        }
-      });
-      conn.release();
+        output.success = true;
+        output.message = '成功登入';
+        output.token   = token;
+        return res.json(output);
+      }
+      else {
+        return res.status(400).send('帳號或密碼錯誤');
+      }
     }
   });
 });

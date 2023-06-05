@@ -17,12 +17,16 @@ const pool  = mysql.createPool({
 //   port: 8889
 // });
 
-function getConnection({okCallBack}) {
+function connect(sql, userData, {okCallBack}) {
   pool.getConnection((err, connection) => {
-    okCallBack(err, connection);
+    if (err) throw err;
+    connection.query(sql, userData, (err, data) => {
+      okCallBack(err, data);
+    });
+    connection.release();
   });
 };
 
 module.exports = {
-  getConnection
+  connect
 }
