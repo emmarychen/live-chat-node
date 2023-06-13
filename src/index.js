@@ -32,6 +32,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/register', require(__dirname + '/routes/register'));
 app.use('/api/login', require(__dirname + '/routes/login'));
 app.use('/api/google', require(__dirname + '/routes/google'));
+app.use('/api/images', require(__dirname + '/routes/images'));
+app.use('/images', require(__dirname + '/routes/control/get_images'));
 
 app.use(express.static(path.resolve(__dirname, './dist')));
 app.get('*', function(req, res) {
