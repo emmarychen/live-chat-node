@@ -39,7 +39,7 @@ router.get('/checkauth', jwt.verifyToken, (req, res) => {
   //     if(err) {
   //       return res.status(401).send("請重新登入");
   //     } else {
-  //       const { id } = decoded
+  //       const { id } = decoded;
   //       console.log(id);
   //       return res.send("驗證成功");
   //     }
