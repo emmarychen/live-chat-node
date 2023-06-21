@@ -5,6 +5,7 @@ const jwt = require(__dirname + '/../jwt.js');
 const router = express.Router();
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_API_URL = process.env.GOOGLE_API_URL;
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 
 router.post('/register', async(req, res) => {
@@ -12,7 +13,7 @@ router.post('/register', async(req, res) => {
     const { access_token } = req.body;
     client.setCredentials({ access_token });
     const userInfo = await client.request({
-      url: 'https://www.googleapis.com/oauth2/v3/userinfo'
+      url: GOOGLE_API_URL
     });
     const { email, name } = userInfo.data;
 
@@ -40,7 +41,7 @@ router.post('/login', async(req, res) => {
     const { access_token } = req.body;
     client.setCredentials({ access_token });
     const userInfo = await client.request({
-      url: 'https://www.googleapis.com/oauth2/v3/userinfo'
+      url: GOOGLE_API_URL
     });
     const { email } = userInfo.data;
 
