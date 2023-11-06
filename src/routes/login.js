@@ -46,7 +46,7 @@ router.get('/checkauth', jwt.verifyToken, (req, res) => {
   //   }
   // });
   console.log(req.user);
-  res.json({ message: '成功訪問受保護的路由' });
+  res.json({ message: '成功訪問受保護的路由', userId: req.user.id });
 });
 
 module.exports = router;
