@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:2.18.1
+    container_name: rymysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ryapp
+    ports:
+      - "3333:3306"
+
+  node:
+    image: ry-node
+    container_name: rynode
+    build:
+      context: .
+      dockerfile: Dev.Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    environment:
+      NODE_ENV: development
+      DB_HOST: rymysql
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: ryapp
+      DB_PORT: 3306

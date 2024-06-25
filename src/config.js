@@ -1,11 +1,11 @@
 const config = {
   development: {
     domain: 'http://localhost:3000',
-    dbHost: 'localhost',
-    dbUser: 'test',
-    dbPassword: 'test',
-    database: 'live_chat',
-    port: 8889
+    dbHost: process.env.DB_HOST || 'localhost',
+    dbUser: process.env.DB_USER || 'test',
+    dbPassword: process.env.DB_PASSWORD || 'test',
+    database: process.env.DB_NAME || 'live_chat',
+    port: process.env.DB_PORT || 8889,
   },
   production: {
     domain: 'https://live-chat-node.herokuapp.com',
