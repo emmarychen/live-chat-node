@@ -14,7 +14,7 @@ router.post('/', (req, res) => {
   pool.connect(sql, [account, password], {
     okCallBack(err, data) {
       if(err) {
-        res.status(500).send('伺服器錯誤');
+        return res.status(500).send('伺服器錯誤');
       }
       if(data.length > 0) {
         const id    = data[0].userId;
