@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
   const { account, password } = req.body;
-  const sql = "INSERT INTO member (userId, pwd) VALUES (?, PASSWORD(?))";
+  const sql = "INSERT INTO member (userId, pwd) VALUES (?, ?)";
 
   pool.connect(sql, [account, password], {
     okCallBack(err, data) {

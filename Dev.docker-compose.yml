@@ -2,13 +2,15 @@ version: '3.8'
 
 services:
   mysql:
-    image: mysql
+    image: mysql01
     container_name: rymysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: ryapp
     ports:
       - "3333:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
 
   node:
     image: ry-node
@@ -27,3 +29,6 @@ services:
       DB_PASSWORD: root
       DB_NAME: ryapp
       DB_PORT: 3306
+      
+volumes:
+  mysql_data:

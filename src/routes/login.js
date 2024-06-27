@@ -10,7 +10,7 @@ router.post('/', (req, res) => {
     message: '',
     token  : ''
   };
-  const sql = "SELECT * FROM member WHERE userId = ? AND pwd = PASSWORD(?)";
+  const sql = "SELECT * FROM member WHERE userId = ? AND pwd = ?";
   pool.connect(sql, [account, password], {
     okCallBack(err, data) {
       if(err) {
